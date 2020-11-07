@@ -1,6 +1,5 @@
 # mobile-development-lab3
-## Складнощі, що виникли під час виконання завдання
-
-
-## Скріншоти виконання
-
+## Difficulties
+1. Difficulties with dynamic images import to make them be displayed in ```<ListItem />``` 
+component. To resolve the issue I had to add ```index.ts``` file to make ```<Avatar />```
+component correctly recognize data in prop ```source```
