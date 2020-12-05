@@ -1,23 +1,9 @@
 import React from 'react';
-import movieData from '../../assets/MoviesList.json';
+import movieData from '../assets/MoviesList.json';
 
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
-import { Movie } from '../../utils/Movie';
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        margin: 0,
-        padding: 0
-    }
-});
-
-interface MovieItemProps {
-    movie: {
-        item: Movie,
-        separators: Object
-    }
-}
+import { Movie } from '../utils/Movie';
+import { ListItem } from 'react-native-elements';
 
 const movieStyles = StyleSheet.create({
     poster: {
@@ -28,7 +14,7 @@ const movieStyles = StyleSheet.create({
     item: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#eee',
+        backgroundColor: 'white',
         padding: 10,
         marginVertical: 8,
         marginHorizontal: 16,
@@ -49,16 +35,24 @@ const movieStyles = StyleSheet.create({
     }
 });
 
+interface MovieItemProps {
+    movie: {
+        item: Movie,
+        separators: Object
+    },
+    onPress: Function
+}
+
 function MovieItem(props: MovieItemProps) {
     
     return (
-        <View style={movieStyles.item}>
+        <ListItem style={movieStyles.item} onPress={() => props.onPress()}>
             {
                 !!props.movie.item.poster?.uri && 
                     <Image style={movieStyles.poster} resizeMethod='resize' source={props.movie.item.poster!.uri} />
             }
             <View style={movieStyles.description}>
-                <Text style={movieStyles.title}>
+                <Text style={movieStyles.title} >
                     {props.movie.item.title}
                 </Text>
                 <View style={movieStyles.details}>
@@ -73,11 +67,12 @@ function MovieItem(props: MovieItemProps) {
                     </Text>
                 </View>
             </View>
-        </View>
+        </ListItem>
     )
 }
 
-export default function MovieListComponent() {
+//@ts-ignore
+export default function MovieListComponent({ navigation }) {
 
     const movies: Movie[] = movieData.Search
         .map((movie: any) =>
@@ -87,11 +82,10 @@ export default function MovieListComponent() {
     return (
         <View>
             <FlatList
-                style={styles.container}
                 data={movies}
                 renderItem={
                     (movie: Movie | any) => (
-                        <MovieItem movie={movie} />
+                        <MovieItem movie={movie} onPress={() => navigation.navigate('MovieDetail', { movie: movie.item })}/>
                     )}
                 keyExtractor={(movie: Movie) => movie.imdbId}>
             </FlatList>

@@ -1,25 +1,28 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import MovieList from "./components/MovieList/MovieListComponent";
+import MovieList from './components/MovieList';
 
-const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      paddingLeft: 20,
-      backgroundColor: '#fff',
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-  },
-  text: {
-      marginBottom: 20
-  }
-});
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MovieDetail from './components/MovieDetail';
+
+const Stack = createStackNavigator();
 
 export default function App() {
 
   return (
-    <View style={styles.container}>
-        <MovieList />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name='Home'
+            component={MovieList}
+            options={{ title: 'My Movies' }}
+          />
+          <Stack.Screen 
+            name='MovieDetail' 
+            component={MovieDetail}
+            options={{ title: 'Movie Details' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
