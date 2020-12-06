@@ -5,6 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MovieDetail from './components/MovieDetail';
 import AddMovie from './components/AddMovie';
+import UploadImage from './components/UploadImage';
+import BottomMenu from './components/BottomMenu';
+import { ScrollView, View } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +17,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name='Home'
+            name='MovieList'
             component={MovieList}
             options={{ title: 'My Movies' }}
           />
@@ -27,6 +30,11 @@ export default function App() {
             name='AddMovie' 
             component={AddMovie}
             options={{ title: 'Add Movie' }}
+          />
+          <Stack.Screen 
+            name='UploadImage' 
+            component={UploadImage}
+            options={{ title: 'Upload Image' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

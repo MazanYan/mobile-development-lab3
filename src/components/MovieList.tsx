@@ -6,6 +6,8 @@ import { Movie } from '../utils/Movie';
 import { Button } from 'react-native-elements';
 import SearchMovie from './SearchMovie';
 import MovieItem from './MovieItem';
+import { ScrollView } from 'react-native-gesture-handler';
+import BottomMenu from './BottomMenu';
 
 const movieStyles = StyleSheet.create({
     topMenu: {
@@ -40,20 +42,23 @@ export default function MovieListComponent({ navigation }) {
 
     return (
         <View>
-            <View style={movieStyles.topMenu}>
-                <View style={movieStyles.search}>
-                    <SearchMovie changeSearchName={setSearchWord}/>
+            <ScrollView>
+                <View style={movieStyles.topMenu}>
+                    <View style={movieStyles.search}>
+                        <SearchMovie changeSearchName={setSearchWord}/>
+                    </View>
+                    <Button style={movieStyles.add} title="+" onPress={() => navigation.navigate('AddMovie', { updateMoviesList: addMovie })}/>
                 </View>
-                <Button style={movieStyles.add} title="+" onPress={() => navigation.navigate('AddMovie', { updateMoviesList: addMovie })}/>
-            </View>
-            <FlatList
-                data={!searchWord ? movies : movies?.filter(movie => movie.title.toLowerCase().includes(searchWord.toLowerCase()))}
-                renderItem={
-                    (movie: Movie | any) => (
-                        <MovieItem movie={movie} onPress={() => navigation.navigate('MovieDetail', { movie: movie.item })}/>
-                    )}
-                keyExtractor={(movie: Movie) => movie.imdbId}>
-            </FlatList>
+                <FlatList
+                    data={!searchWord ? movies : movies?.filter(movie => movie.title.toLowerCase().includes(searchWord.toLowerCase()))}
+                    renderItem={
+                        (movie: Movie | any) => (
+                            <MovieItem movie={movie} onPress={() => navigation.navigate('MovieDetail', { movie: movie.item })}/>
+                        )}
+                    keyExtractor={(movie: Movie) => movie.imdbId}>
+                </FlatList>
+            </ScrollView>
+            <BottomMenu navigation={navigation}/>
         </View>
     );
 }
