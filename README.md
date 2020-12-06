@@ -1,4 +1,4 @@
-# mobile-development-lab4
+# mobile-development-lab4-5
 ## Difficulties
 1. Difficulties with dynamic images import to make them be displayed in ```<ListItem />``` 
 component. To resolve the issue I had to add ```index.ts``` file to make ```<Avatar />```
