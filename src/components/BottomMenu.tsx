@@ -1,6 +1,5 @@
-import { Link } from '@react-navigation/native';
 import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 
 const bottomMenuStyles = StyleSheet.create({
     container: {
@@ -21,6 +20,9 @@ export default function BottomMenu({ navigation }) {
             </View>
             <View style={bottomMenuStyles.button}>
                 <Button title='Upload Image' onPress={ () => navigation.navigate('UploadImage', {}) } />
+            </View>
+            <View style={bottomMenuStyles.button}>
+                <Button title='Plot' onPress={ () => navigation.navigate('Plot', {}) } />
             </View>
         </View>
     );

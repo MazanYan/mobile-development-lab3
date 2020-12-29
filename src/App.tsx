@@ -6,8 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MovieDetail from './components/MovieDetail';
 import AddMovie from './components/AddMovie';
 import UploadImage from './components/UploadImage';
-import BottomMenu from './components/BottomMenu';
-import { ScrollView, View } from 'react-native';
+import MyPlot from './components/MyPlot';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +34,11 @@ export default function App() {
             name='UploadImage' 
             component={UploadImage}
             options={{ title: 'Upload Image' }}
+          />
+          <Stack.Screen 
+            name='Plot' 
+            component={MyPlot}
+            options={{ title: 'Plot' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
